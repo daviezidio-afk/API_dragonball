@@ -1,23 +1,59 @@
-document.getElementById("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const nome = document.getElementById("nome").value;
+const form = document.getElementById('formulario-endereco');
+const campoNome = document.getElementById('campo-cep');
+const mensagemStatus = document.getElementById('mensagem-status');
+const imagem = document.getElementById('imagem-personagem');
+const campoGenero = document.getElementById('campo-genero');
+const campoRaca = document.getElementById('campo-raca');
+const campoKi = document.getElementById('campo-ki');
+const campoMaxKi = document.getElementById('campo-maxki');
+const campoAfiliacao = document.getElementById('campo-afiliacao');
 
-  const res = await fetch(
-    `https://dragonball-api.com/api/characters?name=${nome}`,
-  );
-  const dados = await res.json();
+form.addEventListener('submit', async (evento) => {
+  evento.preventDefault();
+  mensagemStatus.textContent = '';
 
-  if (dados.length === 0) {
-    document.getElementById("erro").textContent = "Não encontrado";
-    return;
+  const nome = campoNome.value.trim();
+  const url = `https://dragonball-api.com/api/characters?name=${nome}`;
+
+  try {
+    exibirMensagem('Consultando...', 'carregando');
+
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+
+    if (dados.length === 0) {
+      exibirMensagem('Personagem não encontrado.', 'erro');
+      limparCampos();
+      return;
+    }
+
+    const p = dados[0];
+    campoGenero.value = p.gender;
+    campoRaca.value = p.race;
+    campoKi.value = p.ki;
+    campoMaxKi.value = p.maxKi;
+    campoAfiliacao.value = p.affiliation;
+    
+    imagem.src = p.image;
+    imagem.style.display = 'block';
+    mensagemStatus.textContent = '';
+
+  } catch (erro) {
+    exibirMensagem('Falha de conexão.', 'erro');
+    limparCampos();
   }
-
-  const p = dados[0];
-  document.getElementById("erro").textContent = "";
-  document.getElementById("foto").src = p.image;
-  document.getElementById("genero").value = p.gender;
-  document.getElementById("raca").value = p.race;
-  document.getElementById("ki").value = p.ki;
-  document.getElementById("maxki").value = p.maxKi;
-  document.getElementById("afiliacao").value = p.affiliation;
 });
+
+function limparCampos() {
+  campoGenero.value = '';
+  campoRaca.value = '';
+  campoKi.value = '';
+  campoMaxKi.value = '';
+  campoAfiliacao.value = '';
+  imagem.style.display = 'none';
+}
+
+function exibirMensagem(texto, tipo) {
+  mensagemStatus.textContent = texto;
+  mensagemStatus.className = `mensagem ${tipo}`;
+}

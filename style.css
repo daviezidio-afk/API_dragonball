@@ -1,19 +1,60 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 body {
-  font-family: sans-serif;
+  background: #f1f5f9;
   display: flex;
   justify-content: center;
-  padding: 30px;
+  align-items: center;
+  min-height: 100vh;
 }
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 250px;
+.cartao-formulario {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
 }
-input,
-button {
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-top: 8px;
+}
+input {
+  width: 100%;
   padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 3px;
 }
-img {
-  margin: 0 auto;
+input[readonly] {
+  background: #f8fafc;
+}
+.linha-busca,
+.linha-dupla {
+  display: flex;
+  gap: 8px;
+}
+.linha-dupla div {
+  flex: 1;
+}
+button {
+  padding: 8px 16px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 3px;
+}
+.mensagem.erro {
+  color: #dc2626;
+  font-size: 0.8rem;
+}
+.mensagem.carregando {
+  color: #2563eb;
+  font-size: 0.8rem;
 }

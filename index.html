@@ -6,17 +6,39 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <form id="form">
-    <input type="text" id="nome" placeholder="Digite o nome de um personagem(dragonball)" required>
-    <button type="submit">Buscar</button>
-    <p id="erro"></p>
-    <input id="genero" placeholder="Gênero" readonly>
-    <input id="raca" placeholder="Raça" readonly>
-    <input id="ki" placeholder="Ki" readonly>
-    <input id="maxki" placeholder="Max Ki" readonly>
-    <input id="afiliacao" placeholder="Afiliação" readonly>
-    <img id="foto" width="150">
-  </form>
+  <main class="cartao-formulario">
+    <h2>Consulta Dragon Ball</h2>
+    
+    <form id="formulario-endereco">
+      <div class="linha-busca">
+        <input type="text" id="campo-cep" placeholder="Ex: Goku" required>
+        <button type="submit">Buscar</button>
+      </div>
+      <span id="mensagem-status" class="mensagem"></span>
+
+      <img id="imagem-personagem" style="display: none; max-height: 150px; margin: 10px auto;">
+
+      <label>Gênero</label>
+      <input type="text" id="campo-genero" readonly>
+
+      <label>Raça</label>
+      <input type="text" id="campo-raca" readonly>
+
+      <div class="linha-dupla">
+        <div>
+          <label>Ki</label>
+          <input type="text" id="campo-ki" readonly>
+        </div>
+        <div>
+          <label>Max Ki</label>
+          <input type="text" id="campo-maxki" readonly>
+        </div>
+      </div>
+
+      <label>Afiliação</label>
+      <input type="text" id="campo-afiliacao" readonly>
+    </form>
+  </main>
 
   <script src="script.js"></script>
 </body>
